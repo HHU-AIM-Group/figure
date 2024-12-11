@@ -159,5 +159,6 @@ ax2.set_ylabel('Loss', color='black')
 # plt.figure(facecolor='lightgrey')
 ```
 ### 绘制出的图像效果示意图为以下两张图片
-![State-Air.svg](C:\Users\csh\Desktop\科研\其他工作\维护代码仓库\State-Air.svg)
-![AU-Air.svg](C:\Users\csh\Desktop\科研\其他工作\维护代码仓库\AU-Air.svg)
+![State-Air.svg](https://s2.loli.net/2024/12/11/NyQUmtWhrC9ReDO.png)
+![AU-Air.svg](https://s2.loli.net/2024/12/11/NyQUmtWhrC9ReDO.png)
+https://s2.loli.net/2024/12/11/YZImt6UjhedvTyE.png)）
