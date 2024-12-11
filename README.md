@@ -158,7 +158,6 @@ ax2.set_ylabel('Loss', color='black')
 # 设置整个图的背景色
 # plt.figure(facecolor='lightgrey')
 ```
-### 绘制出的图像效果示意图为以下两张图片
+### 绘制出的图像效果示意图为以下两张图片,第一张为State-Air.svg，第二张为AU-Air.svg
 ![State-Air.svg](https://s2.loli.net/2024/12/11/NyQUmtWhrC9ReDO.png)
 ![AU-Air.svg](https://s2.loli.net/2024/12/11/NyQUmtWhrC9ReDO.png)
-https://s2.loli.net/2024/12/11/YZImt6UjhedvTyE.png)）
