@@ -1,175 +1,43 @@
 # 画图的代码   
-# 统计图的种类
+## 统计图的种类
 1.柱状图（Bar Chart）  
+
+![myplot](https://github.com/user-attachments/assets/ed77bb3e-27b3-43fd-96b5-7a048eb32cc6)
+
 2.折线图（Line Chart）  
+
+![State-Air.svg](https://s2.loli.net/2024/12/11/NyQUmtWhrC9ReDO.png)
+
 3.散点图（Scatter Plot）  
+
+![myplot](https://github.com/user-attachments/assets/5acce138-a5e3-470c-93a4-fc56695ca6d0)
+
 4.饼图（Pie Chart）  
+
+![myplot](https://github.com/user-attachments/assets/3f360c79-ecd3-44de-bebb-658785319b55)
+
 5.直方图（Histogram）  
+
+![myplot](https://github.com/user-attachments/assets/614ec1ff-7986-4cfd-bf36-d70d5b3b45c0)
+
 6.箱线图（Box Plot） 用于显示数据的分布、中位数、四分位数和异常值  
+
+![myplot](https://github.com/user-attachments/assets/4e6600da-2df7-4061-8c8c-9bc01f7855ca)
+
 7.热力图（Heatmap）  用于显示矩阵数据的值，通过颜色表示大小  
+
+![myplot](https://github.com/user-attachments/assets/fba53a0d-1956-449a-b244-adeb317c7dfb)
+
 8.面积图（Area Chart）  用于显示数据随时间的变化趋势，并强调总量  
-9.雷达图（Radar Chart）  用于显示多个变量的相对大小  
+
+![myplot](https://github.com/user-attachments/assets/6f2b169f-58e2-40e2-97e9-e30ad8987ebb)
+
+9.雷达图（Radar Chart）  用于显示多个变量的相对大小 
+
+![myplot](https://github.com/user-attachments/assets/834e238b-dd0f-4eae-8b6a-755671c97e71)
+
 10.气泡图（Bubble Chart）  用于显示三个变量之间的关系，其中气泡大小表示第三个变量。  
 
-```python
-import matplotlib.pyplot as plt
-from matplotlib import patheffects
-import numpy as np
-# 读取两个TXT文件中的数据
-with open('output/State-Air/map_对抗.txt', 'r') as file:
-    data1 = [float(line.strip()) for line in file.readlines()]
-
-with open('output/State-Air/map_无对抗.txt', 'r') as file:
-    data2 = [float(line.strip()) for line in file.readlines()]
-    
-with open('output/State-Air/loss_对抗.txt', 'r') as file:
-    data3 = [float(line.strip()) for line in file.readlines()]
-
-with open('output/State-Air/loss_无对抗.txt', 'r') as file:
-    data4 = [float(line.strip()) for line in file.readlines()]
-
-
-with open('output/AU-AIR/map_对抗训练.txt', 'r') as file:
-    data1 = [float(line.strip()) for line in file.readlines()]
-
-with open('output/AU-AIR/map_无对抗训练.txt', 'r') as file:
-    data2 = [float(line.strip()) for line in file.readlines()]
-
-with open('output/AU-AIR/loss_对抗训练.txt', 'r') as file:
-    data3 = [float(line.strip()) for line in file.readlines()]
-
-with open('output/AU-AIR/loss_无对抗训练.txt', 'r') as file:
-    data4 = [float(line.strip()) for line in file.readlines()]
-
-# Generate x-axis data
-x1 = [i*10 for i in range(len(data1))]
-x2 = [i for i in range(len(data3))]
-
-# Create subplots
-fig, ax1 = plt.subplots(figsize=(8, 6), frameon=False)
-plt.gca().set_facecolor('#F2F2F2')  # Set background color
-
-# Plot mAP curves with narrower shaded regions
-std_multiplier = 0.12  # Adjust this value to control the width of the shaded region
-
-line1, = ax1.plot(x1, data1, label='mAP w/ Adversarial', color='#FF9500', linestyle='-', marker='o', markersize=5, markevery=1, linewidth=2, clip_on=False)
-line2, = ax1.plot(x1, data2, label='mAP w/o Adversarial', color='#D5558B', linestyle='--', marker='^', markersize=5, markevery=1, linewidth=2, clip_on=False)
-ax1.fill_between(x1, np.array(data1) - std_multiplier * np.std(data1), np.array(data1) + std_multiplier * np.std(data1), color='#FF9500', alpha=0.2)
-ax1.fill_between(x1, np.array(data2) - std_multiplier * np.std(data2), np.array(data2) + std_multiplier * np.std(data2), color='#D5558B', alpha=0.2)
-ax1.set_ylabel('mAP', color='black', fontsize=14)
-ax1.set_ylim(0, max(data1 + data2) * 1.1)
-# Create the second y-axis for loss
-ax2 = ax1.twinx()
-line3, = ax2.plot(x2, data3, label='loss w/ Adversarial', color='#00B8DA', linestyle='-', linewidth=2, clip_on=False)
-line4, = ax2.plot(x2, data4, label='loss w/o Adversarial', color='#8D5242', linestyle='--', linewidth=2, clip_on=False)
-ax2.fill_between(x2, np.array(data3) - std_multiplier * np.std(data3), np.array(data3) + std_multiplier * np.std(data3), color='#00B8DA', alpha=0.2)
-ax2.fill_between(x2, np.array(data4) - std_multiplier * np.std(data4), np.array(data4) + std_multiplier * np.std(data4), color='#8D5242', alpha=0.2)
-ax2.set_ylabel('Loss', color='black', fontsize=14)
-# Add title and labels
-fig.text(0.5, 0.04, 'Epochs', ha='center', fontsize=14)
-# plt.title('Impact of Adversarial Learning')
-
-# Create a combined legend
-lines = [line1, line2, line3, line4]
-labels = [line.get_label() for line in lines]
-plt.legend(lines, labels, fontsize=16, loc='right')
-
-# Remove borders
-for ax in [ax1, ax2]:
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['left'].set_visible(False)
-    ax.spines['bottom'].set_visible(False)
-
-plt.grid(True, linestyle='solid', color='white', alpha=1, axis="both")
-plt.xlim(0, 200)
-# plt.ylim(0, 0.35)
-# Display the plot
-plt.show()
-
-"""# 生成x轴数据
-x1 = [i*10 for i in range(len(data1))]
-x2 = [i for i in range(len(data3))]
-
-# 绘制曲线图
-fig, ax1 = plt.subplots(figsize=(8, 6), frameon=False)
-plt.gca().set_facecolor('#F2F2F2')  # 设置背景色为灰色
-
-line1, = ax1.plot(x1, data1, label='mAP w/ Adversarial', color='#FF9500', linestyle='-', marker='o', markersize=5, markevery=1, linewidth=2)
-line2, = ax1.plot(x1, data2, label='mAP w/o Adversarial', color='#D5558B', linestyle='--', marker='^', markersize=5, markevery=1, linewidth=2)
-ax1.set_ylabel('mAP', color='black')
-
-# 创建第二个y轴
-ax2 = ax1.twinx()
-line3, = ax2.plot(x2, data3, label='loss w/ Adversarial', color='#00B8DA', linestyle='-', linewidth=2)
-line4, = ax2.plot(x2, data4, label='loss w/o Adversarial', color='#8D5242', linestyle='--', linewidth=2)
-ax2.set_ylabel('Loss', color='black')
-plt.xlabel('Epochs')
-plt.title('Impact of Adversarial Learning')
-plt.legend([line1, line2, line3, line4], ['mAP w/ Adversarial', 'mAP w/o Adversarial',
-                                          'loss w/ Adversarial','loss w/o Adversarial'], fontsize=20, loc='right')
-
-# Add shadows to the lines
-for line in [line1, line2, line3, line4]:
-    line.set_path_effects([patheffects.withStroke(linewidth=4, foreground='black')])
-
-plt.grid(True, linestyle='-', color='gray', alpha=0.7, axis="both")
-
-plt.show()"""
-
-"""# 生成x轴数据
-x1 = [i*10 for i in range(len(data1))]
-x2 = [i for i in range(len(data3))]
-
-# 绘制曲线图
-fig, ax1 = plt.subplots(figsize=(8, 6))
-line1, = ax1.plot(x1, data1, label='mAP w/ Adversarial', color='#FF9500', linestyle='-', marker='o', markersize=5, markevery=1, linewidth=2)
-line2, = ax1.plot(x1, data2, label='mAP w/o Adversarial', color='#D5558B', linestyle='--', marker='^', markersize=5, markevery=1, linewidth=2)
-ax1.set_ylabel('mAP', color='black')
-
-# 创建第二个y轴
-ax2 = ax1.twinx()
-line3, = ax2.plot(x2, data3, label='loss w/ Adversarial', color='#00B8DA', linestyle='-', linewidth=2)
-line4, = ax2.plot(x2, data4, label='loss w/o Adversarial', color='#8D5242', linestyle='--', linewidth=2)
-ax2.set_ylabel('Loss', color='black')
-plt.xlabel('Epochs')
-plt.title('Impact of Adversarial Learning')
-plt.legend([line1, line2, line3, line4], ['mAP w/ Adversarial', 'mAP w/o Adversarial',
-                                          'loss w/ Adversarial','loss w/o Adversarial'], fontsize=20, loc='right')
-
-
-plt.grid(True, linestyle='-', color='gray', alpha=0.7, axis="both")
-
-plt.show()
-"""
-"""# 绘制曲线图
-plt.plot(x1, data1, label='mAP w/ Adversarial', color='blue')
-plt.plot(x1, data2, label='mAP w/o Adversarial', color='red')
-plt.plot(x2, data3, label='loss w/ Adversarial', color='green')
-plt.plot(x2, data4, label='loss w/o No Adversarial', color='orange')
-
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.title('Impact of Adversarial Learning')
-plt.legend(fontsize=14)
-plt.grid(True)
-plt.show()"""
-
-"""# 绘制曲线图
-fig, ax1 = plt.subplots()
-line1, = ax1.plot(x1, data1, label='mAP w/ Adversarial', color='#FF9500')
-line2, = ax1.plot(x1, data2, label='mAP w/o Adversarial', color='#D5558B')
-ax1.set_ylabel('mAP', color='black')
-
-# 创建第二个y轴
-ax2 = ax1.twinx()
-line3, = ax2.plot(x2, data3, label='loss w/ Adversarial', color='#00B8DA')
-line4, = ax2.plot(x2, data4, label='loss w/o No Adversarial', color='#007560')
-ax2.set_ylabel('Loss', color='black')
-"""
-# 设置整个图的背景色
-# plt.figure(facecolor='lightgrey')
-```
 ### 绘制出的图像效果示意图为以下两张图片,第一张为State-Air.svg，第二张为AU-Air.svg
 ![State-Air.svg](https://s2.loli.net/2024/12/11/NyQUmtWhrC9ReDO.png)
 ![AU-Air.svg](https://s2.loli.net/2024/12/11/NyQUmtWhrC9ReDO.png)
