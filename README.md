@@ -1,4 +1,16 @@
 # 画图的代码   
+# 统计图的种类
+1.柱状图（Bar Chart）  
+2.折线图（Line Chart）  
+3.散点图（Scatter Plot）  
+4.饼图（Pie Chart）  
+5.直方图（Histogram）  
+6.箱线图（Box Plot） 用于显示数据的分布、中位数、四分位数和异常值  
+7.热力图（Heatmap）  用于显示矩阵数据的值，通过颜色表示大小  
+8.面积图（Area Chart）  用于显示数据随时间的变化趋势，并强调总量  
+9.雷达图（Radar Chart）  用于显示多个变量的相对大小  
+10.气泡图（Bubble Chart）  用于显示三个变量之间的关系，其中气泡大小表示第三个变量。  
+
 ```python
 import matplotlib.pyplot as plt
 from matplotlib import patheffects
