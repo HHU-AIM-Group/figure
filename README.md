@@ -1,7 +1,7 @@
 # 画图的代码   
 需要注意的是除了折线图（Line Chart）外，其他图像都非常简单，还需要完善。
 ## 统计图的种类
-1.柱状图（Bar Chart）  
+1.柱状图（Bar Chart）,这里展示柱状图和折线图并列的画法，单独画折线图可以删除折线图，并修改坐标系数据  
 
 ![myplot](https://github.com/user-attachments/assets/ddf2aeca-47e8-4aa7-858c-5401fe1d3588)
 
