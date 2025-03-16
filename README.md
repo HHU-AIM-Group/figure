@@ -3,7 +3,7 @@
 ## 统计图的种类
 1.柱状图（Bar Chart）  
 
-![myplot](https://github.com/user-attachments/assets/ed77bb3e-27b3-43fd-96b5-7a048eb32cc6)
+![myplot](https://github.com/user-attachments/assets/ddf2aeca-47e8-4aa7-858c-5401fe1d3588)
 
 2.折线图（Line Chart）  
 
