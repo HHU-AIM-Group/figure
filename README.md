@@ -39,8 +39,7 @@
 
 10.气泡图（Bubble Chart）  用于显示三个变量之间的关系，其中气泡大小表示第三个变量。  
 
-![myplot](https://github.com/user-attachments/assets/50ac9405-899c-4ac1-be14-682d0622913f)
-
+![myplot.png](picture-code-project%2FBubble%20Chart%2Fmyplot.png)
 
 以下为两张图的图片名，可以忽略
 ### 绘制出的图像效果示意图为以下两张图片,第一张为State-Air.svg，第二张为AU-Air.svg
