@@ -8,7 +8,8 @@ https://www.overleaf.com/
 ![img_1.png](img_1.png)
 ## 一些快捷键
 
-![img.png](img.png)
+![img](https://github.com/user-attachments/assets/e1b95e86-5558-445d-9042-0ccb8351c673)
+
 
 ## 统计图实例
 
